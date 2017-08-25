@@ -1,9 +1,10 @@
 {
   "name": "dropscape-fronter",
   "version": "0.0.1",
+  "description": "web game platform",  
   "scripts": {
     "start": "webpack-dev-server --progress",
-    "build": "NODE_ENV=prod node_modules/.bin/webpack -p --progress --colors"
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress --colors"
   },
   "dependencies": {
     "react": "^15.0.0",

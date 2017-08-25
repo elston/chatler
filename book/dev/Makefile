@@ -111,6 +111,18 @@ bootstrap_fronter:
 		fronter
 
 
+# target: bootstrap_backer - bootstrap backer contaner
+.PHONY: bootstrap_backer
+bootstrap_backer:
+	@echo "---> bootstrap backer"	
+	@docker-compose \
+		-p $(PROJECT) \
+		-f bootstrap.yml \
+		run \
+		--rm \
+		backer		
+
+
 # target: bootstrap_all - bootstrap all images
 .PHONY: bootstrap_all
 bootstrap_all:

@@ -52,7 +52,7 @@ var config = {
 /*
  * production
  */
-if (process.env.NODE_ENV === 'prod') {
+if (process.env.NODE_ENV === 'production') {
 
     // ****************************************
     // ..main
@@ -76,7 +76,7 @@ if (process.env.NODE_ENV === 'prod') {
         // ..3. DefinePlugin
         new webpack.DefinePlugin({
             'process.env': {
-                NODE_ENV: JSON.stringify('prod')
+                NODE_ENV: JSON.stringify('production')
             }
         })
     ];

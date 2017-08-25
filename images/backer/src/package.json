@@ -1,0 +1,12 @@
+{
+  "name": "dropscape-backer",
+  "version": "0.0.1",
+  "description": "web game platform",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~4.13.3"
+  }
+}
