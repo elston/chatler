@@ -91,8 +91,8 @@ services:
     environment:
       - PROJECT=backer
       - NODE_ENV=dev
-      - DEVSERVER_PORT=8000
-      - DEVSERVER_HOST=0.0.0.0
+      - SERVER_PORT=8000
+      - SERVER_HOST=0.0.0.0
     volumes:
       - ../../images/backer/src:/backer
       - ../../images/backer/runserv.sh:/usr/local/bin/runserv.sh
