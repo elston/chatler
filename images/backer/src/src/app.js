@@ -5,23 +5,25 @@
 import express from 'express';
 
 // ..
+const PORT = process.env.SERVER_PORT;
+const HOST = process.env.SERVER_HOST;
+
+// ...
 const app = express();
 
 // ...
-app.get('/', function(req, res){
+app.get('/', (req, res)=>{
     res.send('Hello World');
 });
 
 // ...
-app.use(function(req, res){
+app.use((req, res)=>{
     res.sendStatus(404); 
 });
 
 
 // ...
-const PORT = process.env.SERVER_PORT;
-const HOST = process.env.SERVER_HOST;
-const server = app.listen(PORT, HOST, function(err) {
+const server = app.listen(PORT, HOST, (err)=>{
     if (err) {
         console.log(err);
         return;
