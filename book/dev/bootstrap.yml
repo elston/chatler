@@ -1,0 +1,42 @@
+version: '3'
+
+# ..volumes
+# ------------------
+volumes:
+  storage_data:
+
+# ..services
+# ------------------
+services:
+
+  # db
+  # ========================================= 
+  # ...
+  storage:
+    image: ${PROJECT}_storage
+    network_mode: "host" 
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${DB_ADMIN_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_ADMIN_PASSWORD}
+    volumes:
+      - storage_data:/data/db
+      - ../../images/storage/mongod.conf:/etc/mongod.conf      
+    command:
+      - -f
+      - /etc/mongod.conf
+
+
+  # app
+  # =========================================
+  # ...
+  fronter:
+    image: ${PROJECT}_fronter
+    network_mode: "host" 
+    environment:
+      - PROJECT=fronter
+      - NODE_ENV=dev
+    volumes:
+      - ../../images/fronter/src:/fronter
+      - ../../images/fronter/bootstrap.sh:/usr/local/bin/bootstrap.sh
+    # ..................................      
+    command: /usr/local/bin/bootstrap.sh    

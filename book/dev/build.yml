@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+
+  # db
+  # ========================================= 
+  # ...
+  storage:
+    build:
+      context: ../../images/storage
+      dockerfile: dev.dockerfile
+    network_mode: "host" 
+
+  # app
+  # =========================================
+  # ...
+
+  fronter:
+    build:
+      context: ../../images/fronter
+      dockerfile: dev.dockerfile
+    network_mode: "host" 
+
+  backer:
+    build:
+      context: ../../images/backer
+      dockerfile: dev.dockerfile
+    network_mode: "host" 
+

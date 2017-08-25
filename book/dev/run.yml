@@ -1,0 +1,76 @@
+version: '3'
+
+# ..networks
+# ------------------
+networks:
+  netmain:
+    driver: bridge
+
+# ..volumes
+# ------------------
+volumes:
+  storage_data:
+
+# ..services
+# ------------------   
+services:
+
+  # db
+  # ========================================= 
+  # ...
+  storage:
+    image: ${PROJECT}_storage
+    expose:
+      - "27017"
+    ports:
+      - "27017:27017"
+    networks:
+      - netmain
+    command:
+      # - --auth
+      - --bind_ip_all
+      - -f
+      - /etc/mongod.conf
+    volumes:
+      - storage_data:/data/db
+      - ../../images/storage/mongod.conf:/etc/mongod.conf
+
+  mongoshell:
+    image: ${PROJECT}_storage
+    tty: true    
+    networks:
+      - netmain
+    depends_on:
+      - storage      
+    environment:
+      - DB_ADMIN_USER=${DB_ADMIN_USER}
+      - DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}      
+    volumes:      
+      - ../../data:/mongoshell_data
+      - ../../images/storage/mongoshell.sh:/usr/local/bin/mongoshell.sh
+
+    command: mongoshell.sh
+
+  # app
+  # =========================================
+  fronter:
+    image: ${PROJECT}_fronter
+    tty: true    
+    expose:
+      - "8080"    
+    ports:
+      - "8080:8080"
+    networks:
+      - netmain
+    depends_on:
+      - storage
+    environment:
+      - PROJECT=fronter
+      - NODE_ENV=dev
+      - DEVSERVER_PORT=8080
+      - DEVSERVER_HOST=0.0.0.0
+    volumes:
+      - ../../images/fronter/src:/fronter
+      - ../../images/fronter/runserv.sh:/usr/local/bin/runserv.sh
+    # ................
+    command: /bin/bash
