@@ -2,7 +2,3 @@
 
 cd /$PROJECT
 npm install
-
-
-
-

@@ -49,7 +49,7 @@ services:
       - ../../data:/mongoshell_data
       - ../../images/storage/mongoshell.sh:/usr/local/bin/mongoshell.sh
 
-    command: mongoshell.sh
+    command: /bin/bash
 
   # app
   # =========================================

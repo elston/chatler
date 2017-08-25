@@ -6,6 +6,7 @@ Web games platfrom
 Technology
 ----------------
 - Docker
+- MongoDb 3.5
 - Nodejs 8.3
 
 
@@ -40,17 +41,6 @@ make bootstrap_all
 
 ```
 make shell_mongoshell
-```
-
-then
-
-```
-use chat_dev;
-db.createUser({
-    user: "usermaster",
-    pwd: "passmaster",
-    roles: ["dbAdmin"]
-});
 ```
 
 

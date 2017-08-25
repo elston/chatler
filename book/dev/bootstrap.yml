@@ -21,6 +21,7 @@ services:
     volumes:
       - storage_data:/data/db
       - ../../images/storage/mongod.conf:/etc/mongod.conf      
+      - ../../images/storage/bootstrap.dev.js:/docker-entrypoint-initdb.d/bootstrap.js      
     command:
       - -f
       - /etc/mongod.conf
