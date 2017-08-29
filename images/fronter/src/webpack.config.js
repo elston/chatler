@@ -39,12 +39,14 @@ var config = {
         colors: true,
         historyApiFallback: true,
         contentBase: __dirname + '/public/',
-        // proxy: {
-        //     "*": "http://localhost:8000"
-        // }
         // ...
         host: process.env.DEVSERVER_HOST,
         port: process.env.DEVSERVER_PORT,
+        // ..
+        '/api/**': {
+            target: 'http://backer:8000',
+            secure: false
+        },        
     },
 }
 

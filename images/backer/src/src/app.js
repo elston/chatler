@@ -24,6 +24,7 @@ app.use((req, res)=>{
 
 // ...
 const server = app.listen(PORT, HOST, (err)=>{
+    // ...
     if (err) {
         console.log(err);
         return;
