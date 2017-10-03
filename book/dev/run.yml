@@ -45,37 +45,17 @@ services:
     environment:
       - DB_ADMIN_USER=${DB_ADMIN_USER}
       - DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}      
+      - DB_NAME=${DB_NAME}      
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     volumes:      
-      - ../../data:/mongoshell_data
+      # - ../../data:/mongoshell_data
       - ../../images/storage/mongoshell.sh:/usr/local/bin/mongoshell.sh
 
     command: /bin/bash
 
   # app
   # =========================================
-  fronter:
-    image: ${PROJECT}_fronter
-    tty: true    
-    expose:
-      - "8080"    
-    ports:
-      - "8080:8080"
-    networks:
-      - netmain
-    depends_on:
-      - storage
-    environment:
-      - PROJECT=fronter
-      - NODE_ENV=dev
-      - DEVSERVER_PORT=8080
-      - DEVSERVER_HOST=0.0.0.0
-    volumes:
-      - ../../images/fronter/src:/fronter
-      - ../../images/fronter/runserv.sh:/usr/local/bin/runserv.sh
-    # ................
-    command: /bin/bash
-
-
 
   backer:
     image: ${PROJECT}_backer
@@ -93,8 +73,42 @@ services:
       - NODE_ENV=dev
       - SERVER_PORT=8000
       - SERVER_HOST=0.0.0.0
+      # ...
+      - DB_HOST=storage
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}      
+      # ..
+      - EMAIL_USER=${EMAIL_USER}
+      - EMAIL_PASS=${EMAIL_PASS}      
     volumes:
       - ../../images/backer/src:/backer
       - ../../images/backer/runserv.sh:/usr/local/bin/runserv.sh
+    # ................
+    command: /bin/bash    
+
+
+  fronter:
+    image: ${PROJECT}_fronter
+    tty: true    
+    expose:
+      - "8080"    
+    ports:
+      - "8080:8080"
+    networks:
+      - netmain
+    # depends_on:
+    #   - storage
+    environment:
+      - PROJECT=fronter
+      - NODE_ENV=dev
+      - DEVSERVER_PORT=8080
+      - DEVSERVER_HOST=0.0.0.0
+      # ...
+      - API_URL_WEBPACK=http://backer:8000      
+      - API_URL=http://localhost:8000
+    volumes:
+      - ../../images/fronter/src:/fronter
+      - ../../images/fronter/runserv.sh:/usr/local/bin/runserv.sh
     # ................
     command: /bin/bash    

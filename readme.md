@@ -8,6 +8,7 @@ Technology
 - Docker
 - MongoDb 3.5
 - Nodejs 8.3
+- React, Redux
 
 
 Getting Started with Docker and Docker Compose for Local Development
@@ -43,13 +44,12 @@ make bootstrap_all
 make shell_mongoshell
 ```
 
-
 ```
 mongo storage:27017/admin -u adminmaster -p passmaster
 ```
 
 ```
-mongo storage:27017/chat_dev -u usermaster -p passmaster
+mongo storage:27017/chatler -u usermaster -p passmaster
 ```
 
 

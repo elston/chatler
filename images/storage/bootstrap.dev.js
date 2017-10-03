@@ -1,4 +1,4 @@
-db = db.getSiblingDB("chat_dev");
+db = db.getSiblingDB("chatler");
 db.createUser({
     user: "usermaster",
     pwd: "passmaster",

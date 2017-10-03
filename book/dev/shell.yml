@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  fronter:
+      external_links:
+        - ${PROJECT}_backer_1:backer
+      command: /bin/bash        
+
+
+   

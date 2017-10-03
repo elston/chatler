@@ -6,6 +6,11 @@ export DB_PASSWORD = passmaster
 export DB_ADMIN_USER = adminmaster
 export DB_ADMIN_PASSWORD = passmaster
 
+# ...
+include ../../security.sh
+export EMAIL_USER = $(GMAIL_COM_USER)
+export EMAIL_PASS = $(GMAIL_COM_PASS)
+
 # target:
 # target: all - Default target. Does nothing
 .PHONY: all
@@ -29,7 +34,7 @@ pull_mongo:
 	@echo "---> pull mongo:3.5"
 	@docker pull mongo:3.5
 
-# target: pull_python - pull python images
+# target: pull_node - pull node images
 .PHONY: pull_node
 pull_node:
 	@echo "---> pull node:8.3-slim"
@@ -40,7 +45,7 @@ pull_node:
 .PHONY: pull_all
 pull_all:
 	@make pull_mongo
-	@make pull_python
+	@make pull_node
 
 
 # target:
@@ -95,7 +100,7 @@ bootstrap_storage:
 		-p $(PROJECT) \
 		-f bootstrap.yml \
 		run \
-		--rm \
+		-d \
 		storage
 
 
@@ -128,6 +133,7 @@ bootstrap_backer:
 bootstrap_all:
 	@make bootstrap_storage
 	@make bootstrap_fronter
+	@make bootstrap_backer	
 
 
 
@@ -152,6 +158,7 @@ shell_fronter:
 	@docker-compose \
 		-p $(PROJECT) \
 		-f run.yml \
+		-f shell.yml \
 		run \
 		--rm \
 		--service-ports \

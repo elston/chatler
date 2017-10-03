@@ -8,10 +8,14 @@ var config = {
     // ****************************************
     // ..main
     // ****************************************    
+    // ..
     devtool: 'inline-source-map',
+    // ..
     entry: [
-        __dirname + "/app/App.jsx"
+        'babel-polyfill',
+        __dirname + "/app",
     ],
+    // ...
     output: {
         path: __dirname + "/public",
         filename: "bundle.js"
@@ -26,8 +30,15 @@ var config = {
             exclude: /node_modules/,
             loader: 'babel',
             query: {
-                presets: ['es2015', 'react']
+                presets: ['es2015', 'stage-0', 'react'],
+                plugins: ['transform-decorators-legacy' ]
             }
+        // },{
+              // test: /\less$/,
+              // loader: "style!css!less"
+        },{
+            test: /\.scss$/,
+            loaders: [ 'style', 'css', 'sass' ]
         }]
     },
 
@@ -35,54 +46,70 @@ var config = {
     // ..devServer
     // ****************************************    
     devServer: {
+        // ...
         inline: true,
         colors: true,
         historyApiFallback: true,
-        contentBase: __dirname + '/public/',
+        contentBase: __dirname + '/',
+
         // ...
         host: process.env.DEVSERVER_HOST,
         port: process.env.DEVSERVER_PORT,
+
         // ..
-        '/api/**': {
-            target: 'http://backer:8000',
+        proxy: {
+          '/api*': {
+            target: process.env.API_URL_WEBPACK,
             secure: false
-        },        
+          }
+        }        
     },
+
+
+    // // ****************************************
+    // // ..plugins
+    // // ****************************************    
+    // plugins: [
+    //     new webpack.DefinePlugin({
+    //         PROCESS_ENV_API_URL: JSON.stringify(process.env.API_URL),
+    //     })    
+    // ],
+
 }
 
 
-/*
- * production
- */
-if (process.env.NODE_ENV === 'production') {
+// /*
+//  * production
+//  */
+// if (process.env.NODE_ENV === 'production') {
 
-    // ****************************************
-    // ..main
-    // ****************************************        
-    config.devtool = false;
+//     // ****************************************
+//     // ..main
+//     // ****************************************        
+//     config.devtool = false;
 
 
-    // ****************************************
-    // ..plugins
-    // ****************************************            
-    config.plugins = [
+//     // ****************************************
+//     // ..plugins
+//     // ****************************************            
+//     config.plugins = [
 
-        // ..1. OccurenceOrderPlugin
-        new webpack.optimize.OccurenceOrderPlugin(),
+//         // ..1. OccurenceOrderPlugin
+//         new webpack.optimize.OccurenceOrderPlugin(),
 
-        // ..2. UglifyJsPlugin
-        new webpack.optimize.UglifyJsPlugin({
-            comments: false
-        }),
+//         // ..2. UglifyJsPlugin
+//         new webpack.optimize.UglifyJsPlugin({
+//             comments: false
+//         }),
 
-        // ..3. DefinePlugin
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: JSON.stringify('production')
-            }
-        })
-    ];
-};
+//         // ..3. DefinePlugin
+//         new webpack.DefinePlugin({
+//             'process.env': {
+//                 NODE_ENV: JSON.stringify('production')
+//             }
+//         })
+//     ];
+// };
 
 
 /*
