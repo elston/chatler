@@ -81,12 +81,23 @@ build_backer:
 		build \
 		backer
 
+# target: build_chat - build chat image
+.PHONY: build_chat
+build_chat:
+	@echo "---> build chat"	
+	@docker-compose \
+		-p $(PROJECT) \
+		-f build.yml \
+		build \
+		chat
+
 # target: build_all - build all images
 .PHONY: build_all
 build_all:
 	@make build_storage
 	@make build_fronter
-	@make build_backer	
+	@make build_backer
+	@make build_chat	
 
 
 # target:
@@ -125,7 +136,19 @@ bootstrap_backer:
 		-f bootstrap.yml \
 		run \
 		--rm \
-		backer		
+		backer
+
+
+# target: bootstrap_chat - bootstrap chat contaner
+.PHONY: bootstrap_chat
+bootstrap_chat:
+	@echo "---> bootstrap chat"	
+	@docker-compose \
+		-p $(PROJECT) \
+		-f bootstrap.yml \
+		run \
+		--rm \
+		chat				
 
 
 # target: bootstrap_all - bootstrap all images

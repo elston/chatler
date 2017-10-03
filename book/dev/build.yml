@@ -27,3 +27,8 @@ services:
       dockerfile: dev.dockerfile
     network_mode: "host" 
 
+  chat:
+    build:
+      context: ../../images/chat
+      dockerfile: dev.dockerfile
+    network_mode: "host"

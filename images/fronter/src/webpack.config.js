@@ -66,14 +66,15 @@ var config = {
     },
 
 
-    // // ****************************************
-    // // ..plugins
-    // // ****************************************    
-    // plugins: [
-    //     new webpack.DefinePlugin({
-    //         PROCESS_ENV_API_URL: JSON.stringify(process.env.API_URL),
-    //     })    
-    // ],
+    // ****************************************
+    // ..plugins
+    // ****************************************    
+    plugins: [
+        new webpack.DefinePlugin({
+            PROCESS_ENV_API_URL: JSON.stringify(process.env.API_URL),
+            PROCESS_ENV_CHAT_URL: JSON.stringify(process.env.CHAT_URL),            
+        })    
+    ],
 
 }
 

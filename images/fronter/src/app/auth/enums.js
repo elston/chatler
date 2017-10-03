@@ -1,3 +1,4 @@
+export const API_URL = PROCESS_ENV_API_URL
 // ..AUTH
 export const SIGNIN_REQUEST = 'SIGNIN_REQUEST'
 export const SIGNIN_SUCCESS = 'SIGNIN_SUCCESS'

@@ -1,0 +1,31 @@
+{
+  "name": "chatler-chat",
+  "version": "0.0.1",
+  "description": "web game platform - chat container",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.1",
+    "compression": "^1.7.0",
+    "cors": "^2.8.4",
+    "es6-error": "^4.0.2",
+    "express": "~4.13.3",
+    "jwt-simple": "^0.5.1",
+    "mongoose": "^4.11.8",
+    "morgan": "^1.8.2",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.13.2",
+    "babel-plugin-transform-builtin-extend": "^1.1.2",
+    "babel-preset-es2015": "^6.13.2",
+    "babel-preset-stage-0": "^6.5.0",
+    "nodemon": "^1.10.0"
+  }
+}

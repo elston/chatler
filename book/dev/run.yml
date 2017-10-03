@@ -106,9 +106,37 @@ services:
       - DEVSERVER_HOST=0.0.0.0
       # ...
       - API_URL_WEBPACK=http://backer:8000      
-      - API_URL=http://localhost:8000
+      - API_URL=http://localhost:8000/api
+      - CHAT_URL=http://localhost:8001      
     volumes:
       - ../../images/fronter/src:/fronter
       - ../../images/fronter/runserv.sh:/usr/local/bin/runserv.sh
     # ................
     command: /bin/bash    
+
+  chat:
+    image: ${PROJECT}_chat
+    tty: true    
+    expose:
+      - "8001"    
+    ports:
+      - "8001:8001"
+    networks:
+      - netmain
+    depends_on:
+      - storage
+    environment:
+      - PROJECT=chat
+      - NODE_ENV=dev
+      - SERVER_PORT=8001
+      - SERVER_HOST=0.0.0.0
+      # ...
+      - DB_HOST=storage
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}      
+    volumes:
+      - ../../images/chat/src:/chat
+      - ../../images/chat/runserv.sh:/usr/local/bin/runserv.sh
+    # ................
+    command: /bin/bash      

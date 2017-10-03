@@ -54,3 +54,15 @@ services:
       - ../../images/backer/bootstrap.sh:/usr/local/bin/bootstrap.sh
     # ..................................      
     command: /usr/local/bin/bootstrap.sh        
+
+  chat:
+    image: ${PROJECT}_chat
+    network_mode: "host" 
+    environment:
+      - PROJECT=chat
+      - NODE_ENV=development
+    volumes:
+      - ../../images/chat/src:/chat
+      - ../../images/chat/bootstrap.sh:/usr/local/bin/bootstrap.sh
+    # ..................................      
+    command: /usr/local/bin/bootstrap.sh      
