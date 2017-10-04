@@ -1,4 +1,5 @@
 export PROJECT = chatler
+export NODE_ENV = dev
 # ....
 export DB_NAME = chatler
 export DB_USER = usermaster
@@ -201,6 +202,19 @@ shell_backer:
 		--service-ports \
 		--name $(PROJECT)_backer_1 \
 		backer
+
+
+# target: shell_chat - shell chat container
+.PHONY: shell_chat
+shell_chat:
+	@docker-compose \
+		-p $(PROJECT) \
+		-f run.yml \
+		run \
+		--rm \
+		--service-ports \
+		--name $(PROJECT)_chat_1 \
+		chat		
 
 # target:
 # target: ===== misc ======== - ============================

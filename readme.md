@@ -8,8 +8,18 @@ Technology
 - Docker
 - MongoDb 3.5
 - Nodejs 8.3
-- React, Redux
+- React, Redux, thunk
 
+Features
+----------------
+- separate apps orientation in project
+- full es6 syntax
+- decorators like python (@) :)
+- async/await in actions
+- async/await in backend controllers
+- jwt authentication
+- registration over email
+- customized error on backand api (again like a python :)
 
 Getting Started with Docker and Docker Compose for Local Development
 --------------------------------------------------------------------

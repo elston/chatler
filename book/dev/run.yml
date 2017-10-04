@@ -70,7 +70,7 @@ services:
       - storage
     environment:
       - PROJECT=backer
-      - NODE_ENV=dev
+      - NODE_ENV=${NODE_ENV}
       - SERVER_PORT=8000
       - SERVER_HOST=0.0.0.0
       # ...
@@ -101,7 +101,7 @@ services:
     #   - storage
     environment:
       - PROJECT=fronter
-      - NODE_ENV=dev
+      - NODE_ENV=${NODE_ENV}
       - DEVSERVER_PORT=8080
       - DEVSERVER_HOST=0.0.0.0
       # ...
@@ -127,7 +127,7 @@ services:
       - storage
     environment:
       - PROJECT=chat
-      - NODE_ENV=dev
+      - NODE_ENV=${NODE_ENV}
       - SERVER_PORT=8001
       - SERVER_HOST=0.0.0.0
       # ...

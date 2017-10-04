@@ -1,36 +1,45 @@
-import express from 'express'
-import http from 'http'
-import bodyParser from 'body-parser'
-import morgan from 'morgan'
-import mongoose from 'mongoose'
-import cors from 'cors'
-import compression from 'compression'
+const logger = require('morgan');
+const express = require('express');
+const http = require('http');
+// ..
+var config = require('./config');
 
-// // ...
-// import * as config from './config'
-// import routes from './routes'
+/**
+ * app stuff
+ */
+const app = express();
 
-// // ..
-// const app = express()
+// ..sets
+app.set('port', config.SERVER_PORT);
 
-// // ..db
-// const { uri:db_uri, option:db_opt } = config.dbConfig
-// mongoose.Promise = global.Promise
-// mongoose.connect(db_uri,db_opt)
-// mongoose.set('debug', true)
+// ..uses
+app.use(logger('combined'));
+
+// ...server
+const server = http.createServer(app);
+server.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
+})
 
 
-// // ..main
-// app.use(compression())
-// app.use(morgan('combined'))
-// app.use(cors())
-// app.use(bodyParser.json({ type: '*/*' }))
+/**
+ * socket
+ */
+var io = require('socket.io')(server);
+var onlineUsers = 0;
 
-// // ..routes
-// app.use('/api', routes)
-
-// // ..server
-// const port = config.SERVER_PORT
-// const server = http.createServer(app)
-// server.listen(port)
-// console.log('server listening on:', port)
+io.sockets.on('connection', function(socket) {
+  // ..
+  onlineUsers++;
+  // ..
+  io.sockets.emit('onlineUsers', { 
+    onlineUsers: onlineUsers 
+  });
+  // ...
+  socket.on('disconnect', function() {
+    onlineUsers--;
+    io.sockets.emit('onlineUsers', { 
+      onlineUsers: onlineUsers 
+    });
+  });
+});
