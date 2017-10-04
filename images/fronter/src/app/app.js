@@ -25,7 +25,7 @@ export default class App extends Component {
           {!this.user &&          
             <li><Link to="/auth/signup">Регистрация</Link></li> }
           {this.user &&
-            <li><Link to="/dashboard">Личный кабинет</Link></li>}
+            <li><Link to="/dashboard">Чат</Link></li>}
           {this.user &&
             <li><Link to="/auth/signout">Выход</Link></li>}            
         </ul>
