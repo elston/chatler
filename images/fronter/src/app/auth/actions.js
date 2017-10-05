@@ -26,7 +26,7 @@ export const signinAction = (props) => {
             const res = await axios.post(`${enums.API_URL}/auth/signin`, { email, password })
             localStorage.setItem('user', JSON.stringify(res.data))
             await dispatch({ type: enums.SIGNIN_SUCCESS })
-            await dispatch(push('/dashboard'))
+            await dispatch(push('/chat'))
         } catch(err) {
             console.log(err)
             dispatch({

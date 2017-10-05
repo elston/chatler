@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "material-ui": "^0.19.3",
+    "node-uuid": "^1.4.8",
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^5.0.6",

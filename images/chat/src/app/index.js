@@ -1,55 +1,20 @@
-const logger = require('morgan');
-const express = require('express');
-const http = require('http');
+import  express from 'express'
+import  http from 'http'
+import SocketIo from 'socket.io'
 // ..
-var config = require('./config');
+import * as config from './config'
+import router from './router'
 
-/**
- * app stuff
- */
-const app = express();
-
-// ..sets
-app.set('port', config.SERVER_PORT);
-
-// ..uses
-app.use(logger('combined'));
+// ...app
+const app = express()
+app.set('port', config.SERVER_PORT)
 
 // ...server
-const server = http.createServer(app);
+const server = http.createServer(app)
 server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 })
 
-
-/**
- * socket
- */
-var io = require('socket.io')(server);
-var onlineUsers = 0;
-io.sockets.on('connection', function(socket) {
-
-  // ..
-  onlineUsers++;
-  console.log('connect, on line '+onlineUsers);
-
-  // ..
-  io.sockets.emit('onlineUsers', { 
-    onlineUsers: onlineUsers 
-  });
-
-  // ...
-  socket.on('disconnect', function() {
-    onlineUsers--;
-    io.sockets.emit('onlineUsers', { 
-      onlineUsers: onlineUsers 
-    });
-    console.log('disconnect, on line '+onlineUsers);
-  });
-
-  // ..
-  socket.on('close_connection', function (){
-    console.log('get close_connection message');    
-    socket.disconnect(0);
-  });
-});
+// ..socket
+const io = new SocketIo(server)
+io.sockets.on('connection', router(io))

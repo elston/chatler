@@ -4,14 +4,14 @@ import { reducer as formReducer } from 'redux-form'
 import { routerReducer } from 'react-router-redux'
 // ..
 import authReducer from './auth/reducers'
-import dashboardReducer from './dashboard/reducers'
+import chatReducer from './chat/reducers'
 
 // ..
 const reducers = { 
   router: routerReducer,
   form: formReducer,
   auth: authReducer,
-  dashboard:dashboardReducer
+  chat:chatReducer
 }
 
 // ..
