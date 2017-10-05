@@ -128,5 +128,5 @@ make ps
 
 Some screenshots...
 --------------------------------------------------------------------
-![001](https://raw.githubusercontent.com/elston/chatler/master/screenshots/00.jpg "00")
 ![001](https://raw.githubusercontent.com/elston/chatler/master/screenshots/01.jpg "01")
+![001](https://raw.githubusercontent.com/elston/chatler/master/screenshots/02.jpg "02")
