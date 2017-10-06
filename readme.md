@@ -21,6 +21,7 @@ Features
 - registration over email
 - async/await in backend controllers
 - customized error in backand controllers (again like a python :)
+- NGINX config for production!!!!! ))))
 
 Getting Started with Docker and Docker Compose for Local Development
 --------------------------------------------------------------------
