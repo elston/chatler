@@ -15,15 +15,26 @@ volumes:
 # ------------------   
 services:
 
-  # db
-  # ========================================= 
-  # ...
+  router:
+    image: nginx:1.13.5-alpine
+    expose:
+      - "8080"    
+    ports:
+      - "8080:80"
+    networks:
+      - netmain
+    depends_on:
+      - backer 
+      - chat     
+    volumes:
+      - ../../images/router/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ../../images/router/runserv.sh:/usr/local/bin/runserv.sh      
+      - ../../images/fronter/src:/fronter
+    # command: ping chat
+
+
   storage:
     image: ${PROJECT}_storage
-    # expose:
-    #   - "27017"
-    # ports:
-    #   - "27017:27017"
     networks:
       - netmain
     command:
@@ -35,16 +46,9 @@ services:
       - storage_data:/data/db
       - ../../images/storage/mongod.conf:/etc/mongod.conf
 
-  # app
-  # =========================================
 
   backer:
     image: ${PROJECT}_backer
-    tty: true    
-    # expose:
-    #   - "8000"    
-    # ports:
-    #   - "8000:8000"
     networks:
       - netmain
     depends_on:
@@ -69,38 +73,8 @@ services:
     command: /usr/local/bin/runserv.sh
 
 
-  fronter:
-    image: ${PROJECT}_fronter
-    tty: true    
-    expose:
-      - "8080"    
-    ports:
-      - "8080:8080"
-    networks:
-      - netmain
-    # depends_on:
-    #   - storage
-    environment:
-      - PROJECT=fronter
-      - NODE_ENV=${NODE_ENV}
-      - DEVSERVER_PORT=8080
-      - DEVSERVER_HOST=0.0.0.0
-      # ...
-      - API_URL_WEBPACK=${API_URL_WEBPACK}
-      - CHAT_URL_WEBPACK=${CHAT_URL_WEBPACK}
-    volumes:
-      - ../../images/fronter/src:/fronter
-      - ../../images/fronter/runserv.sh:/usr/local/bin/runserv.sh
-    # ................
-    command: /usr/local/bin/runserv.sh
-
   chat:
     image: ${PROJECT}_chat
-    tty: true    
-    # expose:
-    #   - "8001"    
-    # ports:
-    #   - "8001:8001"
     networks:
       - netmain
     depends_on:
@@ -108,7 +82,7 @@ services:
     environment:
       - PROJECT=chat
       - NODE_ENV=${NODE_ENV}
-      - SERVER_PORT=8001
+      - SERVER_PORT=8000
       - SERVER_HOST=0.0.0.0
       # ...
       - DB_HOST=storage

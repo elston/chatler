@@ -3,11 +3,7 @@ export NODE_ENV = dev
 
 # ...
 export API_URL_WEBPACK = http://backer:8000
-# export API_URL = http://localhost:8000/api
-# ..
-# export CHAT_URL_WEBPACK = http://chat:8000
 export CHAT_URL_WEBPACK = ws://chat:8000
-# export CHAT_URL = http://localhost:8001
 
 # ....
 export DB_NAME = chatler
@@ -50,12 +46,18 @@ pull_node:
 	@echo "---> pull node:8.3-slim"
 	@docker pull node:8.3-slim
 
+# target: pull_nginx - pull nginx images
+.PHONY: pull_nginx
+pull_nginx:
+	@echo "---> pull nginx:1.13.5-alpine"	
+	@docker pull nginx:1.13.5-alpine
 
 # target: pull_all - pull base images
 .PHONY: pull_all
 pull_all:
 	@make pull_mongo
 	@make pull_node
+	@make pull_nginx
 
 
 # target:
@@ -172,6 +174,19 @@ bootstrap_all:
 
 # target:
 # target: ===== shell ======= - ============================
+
+# target: shell_router - shell router container
+.PHONY: shell_router
+shell_router:
+	@docker-compose \
+		-p $(PROJECT) \
+		-f run.yml \
+		-f shell.yml \
+		run \
+		--rm \
+		--service-ports \
+		--name $(PROJECT)_router_1 \
+		router
 
 # target: shell_mongoshell - shell mongoshell container
 .PHONY: shell_mongoshell

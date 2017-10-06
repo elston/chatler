@@ -4,7 +4,7 @@
   "description": "web game platform",
   "scripts": {
     "start": "webpack-dev-server --progress",
-    "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress --colors"
+    "build": "NODE_ENV=production node_modules/.bin/webpack --config ./webpack.config.prod.js -p --progress --colors"
   },
   "dependencies": {
     "axios": "^0.16.2",

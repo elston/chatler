@@ -7,5 +7,7 @@ services:
         - ${PROJECT}_backer_1:backer
         - ${PROJECT}_chat_1:chat
 
-
-   
+  router:
+      external_links:
+        - ${PROJECT}_backer_1:backer
+        - ${PROJECT}_chat_1:chat   
