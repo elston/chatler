@@ -16,5 +16,6 @@ server.listen(app.get('port'), function(){
 })
 
 // ..socket
-const io = new SocketIo(server)
+// const io = new SocketIo(server)
+const io = new SocketIo(server,{path: '/chat'})
 io.sockets.on('connection', router(io))

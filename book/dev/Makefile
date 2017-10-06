@@ -1,5 +1,14 @@
 export PROJECT = chatler
 export NODE_ENV = dev
+
+# ...
+export API_URL_WEBPACK = http://backer:8000
+# export API_URL = http://localhost:8000/api
+# ..
+# export CHAT_URL_WEBPACK = http://chat:8000
+export CHAT_URL_WEBPACK = ws://chat:8000
+# export CHAT_URL = http://localhost:8001
+
 # ....
 export DB_NAME = chatler
 export DB_USER = usermaster

@@ -5,7 +5,7 @@ services:
   fronter:
       external_links:
         - ${PROJECT}_backer_1:backer
-      command: /bin/bash        
+        - ${PROJECT}_chat_1:chat
 
 
    

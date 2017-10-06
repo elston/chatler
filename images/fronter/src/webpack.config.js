@@ -9,7 +9,8 @@ var config = {
     // ..main
     // ****************************************    
     // ..
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
+    devtool: 'source-map',
     // ..
     entry: [
         'babel-polyfill',
@@ -17,7 +18,7 @@ var config = {
     ],
     // ...
     output: {
-        path: __dirname + "/public",
+        path: __dirname + "/build",
         filename: "bundle.js"
     },
 
@@ -61,7 +62,15 @@ var config = {
           '/api*': {
             target: process.env.API_URL_WEBPACK,
             secure: false
-          }
+          },
+          // '/chat': {
+          //   target: process.env.CHAT_URL_WEBPACK,
+          //   secure: false
+          // },
+          '/chat/*': {
+            target: process.env.CHAT_URL_WEBPACK,
+            ws: true,
+          },
         }        
     },
 
@@ -69,12 +78,12 @@ var config = {
     // ****************************************
     // ..plugins
     // ****************************************    
-    plugins: [
-        new webpack.DefinePlugin({
-            PROCESS_ENV_API_URL: JSON.stringify(process.env.API_URL),
-            PROCESS_ENV_CHAT_URL: JSON.stringify(process.env.CHAT_URL),            
-        })    
-    ],
+    // plugins: [
+    //     new webpack.DefinePlugin({
+    //         PROCESS_ENV_API_URL: JSON.stringify(process.env.API_URL),
+    //         PROCESS_ENV_CHAT_URL: JSON.stringify(process.env.CHAT_URL),            
+    //     })    
+    // ],
 
 }
 

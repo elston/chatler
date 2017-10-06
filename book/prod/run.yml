@@ -20,10 +20,10 @@ services:
   # ...
   storage:
     image: ${PROJECT}_storage
-    expose:
-      - "27017"
-    ports:
-      - "27017:27017"
+    # expose:
+    #   - "27017"
+    # ports:
+    #   - "27017:27017"
     networks:
       - netmain
     command:
@@ -34,25 +34,6 @@ services:
     volumes:
       - storage_data:/data/db
       - ../../images/storage/mongod.conf:/etc/mongod.conf
-
-  mongoshell:
-    image: ${PROJECT}_storage
-    tty: true    
-    networks:
-      - netmain
-    depends_on:
-      - storage      
-    environment:
-      - DB_ADMIN_USER=${DB_ADMIN_USER}
-      - DB_ADMIN_PASSWORD=${DB_ADMIN_PASSWORD}      
-      - DB_NAME=${DB_NAME}      
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-    volumes:      
-      # - ../../data:/mongoshell_data
-      - ../../images/storage/mongoshell.sh:/usr/local/bin/mongoshell.sh
-
-    command: /bin/bash
 
   # app
   # =========================================
@@ -85,7 +66,7 @@ services:
       - ../../images/backer/src:/backer
       - ../../images/backer/runserv.sh:/usr/local/bin/runserv.sh
     # ................
-    command: /bin/bash    
+    command: /usr/local/bin/runserv.sh
 
 
   fronter:
@@ -106,14 +87,12 @@ services:
       - DEVSERVER_HOST=0.0.0.0
       # ...
       - API_URL_WEBPACK=${API_URL_WEBPACK}
-      # - API_URL=${API_URL}
       - CHAT_URL_WEBPACK=${CHAT_URL_WEBPACK}
-      # - CHAT_URL=${CHAT_URL}
     volumes:
       - ../../images/fronter/src:/fronter
       - ../../images/fronter/runserv.sh:/usr/local/bin/runserv.sh
     # ................
-    command: /bin/bash    
+    command: /usr/local/bin/runserv.sh
 
   chat:
     image: ${PROJECT}_chat
@@ -129,7 +108,7 @@ services:
     environment:
       - PROJECT=chat
       - NODE_ENV=${NODE_ENV}
-      - SERVER_PORT=8000
+      - SERVER_PORT=8001
       - SERVER_HOST=0.0.0.0
       # ...
       - DB_HOST=storage
@@ -140,4 +119,4 @@ services:
       - ../../images/chat/src:/chat
       - ../../images/chat/runserv.sh:/usr/local/bin/runserv.sh
     # ................
-    command: /bin/bash      
+    command: /usr/local/bin/runserv.sh
