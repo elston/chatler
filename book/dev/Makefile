@@ -3,7 +3,10 @@ export NODE_ENV = dev
 
 # ...
 export API_URL_WEBPACK = http://backer:8000
+export API_URL_NGINX = http://backer:8000
+# ..
 export CHAT_URL_WEBPACK = ws://chat:8000
+export CHAT_URL_NGINX = http://chat:8000
 
 # ....
 export DB_NAME = chatler

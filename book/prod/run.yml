@@ -25,12 +25,15 @@ services:
       - netmain
     depends_on:
       - backer 
-      - chat     
+      - chat   
+    environment:
+      - API_URL=${API_URL_NGINX}
+      - CHAT_URL=${CHAT_URL_NGINX}        
     volumes:
-      - ../../images/router/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ../../images/router/runserv.sh:/usr/local/bin/runserv.sh      
+      - ../../images/router/nginx.conf.template:/etc/nginx/conf.d/nginx.conf.template
+      - ../../images/router/runserv.sh:/usr/local/bin/runserv.sh
       - ../../images/fronter/src:/fronter
-    # command: ping chat
+    command: /usr/local/bin/runserv.sh
 
 
   storage:
