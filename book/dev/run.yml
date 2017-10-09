@@ -18,9 +18,9 @@ services:
   router:
     image: nginx:1.13.5-alpine
     expose:
-      - "8081"    
+      - "80"    
     ports:
-      - "8081:80"
+      - "80:80"
     networks:
       - netmain
     environment:

@@ -7,13 +7,11 @@ server {
     charset utf-8;        
 
     # ...
-    location / {
-        root   /fronter;
-        index  index.html;        
-    }    
+    root   /fronter;
+    index  index.html;        
     
     # ...
-    location /api/ {
+    location /api {
         proxy_pass ${API_URL};
         proxy_redirect off;   
         proxy_pass_header X-CSRFToken;             
@@ -25,7 +23,7 @@ server {
     }
 
     # ...
-    location /chat/ {
+    location /chat {
         proxy_pass ${CHAT_URL};
         proxy_http_version 1.1;
         proxy_set_header Upgrade ${DOLLAR}http_upgrade;
@@ -36,6 +34,11 @@ server {
     # ...
     location /bundle.js {
         alias   /fronter/build/bundle.js;
+    }    
+
+    # ...
+    location / {
+        try_files ${DOLLAR}uri ${DOLLAR}uri/ /index.html;
     }    
 
 }
