@@ -88,11 +88,13 @@ After that, open browswer and link `localhost:8080`
 Addition commands 
 --------------------------------------------------------------------
 
-### When you need run all containers in production environment ( in book/prod cactalog):
+### When you need run all containers :
 
 ```
 make up
 ```
+
+* only in production environment ( in book/prod catalog)
 
 ### When you need finish all containers:
 
