@@ -65,7 +65,7 @@ mongo storage:27017/chatler -u usermaster -p passmaster
 ```
 
 
-After that we have 
+After that we have for develop
 --------------------------------------------------------------------
 
 ### To run any command inside the Django Docker container, simply prepend:
@@ -87,6 +87,12 @@ After that, open browswer and link `localhost:8080`
 
 Addition commands 
 --------------------------------------------------------------------
+
+### When you need run all containers in production environment ( in book/prod cactalog):
+
+```
+make up
+```
 
 ### When you need finish all containers:
 
