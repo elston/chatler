@@ -94,7 +94,7 @@ Addition commands
 make up
 ```
 
-* only in production environment ( in book/prod catalog)
+!!! only in production environment ( in book/prod catalog)
 
 ### When you need finish all containers:
 
